@@ -611,9 +611,6 @@ module HexaPDF
     # See: PDF2.0 s7.2.2
     def version
       catalog_version = (catalog[:Version] || '1.0').to_s
-
-      return @version if use_document_version
-      
       (@version < catalog_version ? catalog_version : @version)
     end
 
@@ -626,14 +623,15 @@ module HexaPDF
       @version = value.to_s
     end
 
-    def use_document_version
-      @use_document_version
+    def pdf_header_version
+      @pdf_header_version
     end
 
     # The are certain cases in which we want to use the document version regardless
     # of catalog's entries.
-    def use_document_version=(value)
-      @use_document_version = value
+    def pdf_header_version=(value)
+      raise ArgumentError, "PDF version must follow format M.N" unless value.to_s.match?(/\A\d\.\d\z/)
+      @pdf_header_version = value.to_s
     end
 
     # Returns +true+ if the document is encrypted.

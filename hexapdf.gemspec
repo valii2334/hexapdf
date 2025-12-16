@@ -47,6 +47,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('webrick')
   s.add_development_dependency('rake')
   s.add_development_dependency('simplecov')
+  s.add_development_dependency('pry')
   s.required_ruby_version = '>= 2.7'
 
   s.author = 'Thomas Leitner'
